@@ -29,7 +29,7 @@ export default function NewItem(){
     }
 
     const handleQuantityChange = (event) => {
-        setQuantity(event.target.value);
+        setQuantity(Number(event.target.value));
     }
 
     const handleCategoryChange = (event) => {
