@@ -37,6 +37,39 @@ export default function ItemList(){
         setSort(event.target.value);
         setGrouped(true);
     }    
+
+    const renderItems = () => {
+        const displayedCategories = [];
+
+        return itemArray.map((item, index) => {
+            if (grouped) {
+                if (!displayedCategories.includes(item.category)) {
+                    displayedCategories.push(item.category);
+                    return (
+                        <div key={index}>
+                            <h2 className="text-xl font-bold capitalize">{item.category}</h2>
+                            <ul>
+                                <Item itemObj={item} />
+                            </ul>
+                        </div>
+                    );
+                } else {
+                    return (
+                        <ul key={index}>
+                            <Item itemObj={item} />
+                        </ul>
+                    );
+                }
+            } else {
+                return (
+                    <ul key={index}>
+                        <Item itemObj={item} />
+                    </ul>
+                );
+            }
+        });
+    };
+
     return (
         <section>
             <div className="flex w-1/2">
@@ -63,24 +96,9 @@ export default function ItemList(){
             </div>
 
             <div>
-                {itemArray.map((item) => {
-                    if (grouped === false) {
-                        return (
-                            <ul><Item itemObj={item} /></ul>
-                        )
-                    } 
-                    else {
-                        return (
-                            <div>
-                                <h2 className="text-l font-bold">{item.category}</h2>
-                                <ul>
-                                    <Item itemObj={item} />
-                                    </ul>
-                            </div>
-                        );
-                    }   
-                })}
+                {renderItems()}
             </div>
+
         </section>
     )
 }
