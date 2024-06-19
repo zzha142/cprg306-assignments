@@ -16,7 +16,7 @@ export default function ItemList(){
 
     let [sort, setSort] = useState("name");
     let [grouped,setGrouped] = useState(false);
-    
+
     //sorted item by name or category: depending on which button is clicked & the default setting is name
     if (sort === "name") {
         itemArray.sort((a,b)=>a.name.localeCompare(b.name));
@@ -24,7 +24,10 @@ export default function ItemList(){
     else if (sort ==="category"){
         itemArray.sort((a,b)=>a.category.localeCompare(b.category));
     }
-    
+    else {
+        itemArray.sort((a,b)=>a.category.localeCompare(b.category));
+    }
+
     const handleSortChange = (event) => {
         setSort(event.target.value);
         setGrouped(false);
@@ -33,19 +36,7 @@ export default function ItemList(){
     const handleGroupedChange = (event) =>{
         setSort(event.target.value);
         setGrouped(true);
-    }
-
-    const groupItemsByCategory = () => {
-        return itemArray.reduce((acc, item) => {
-            const category = item.category;
-            if (!acc[category]) {
-                acc[category] = [];
-            }
-            acc[category].push(item);
-            return acc;
-        }, {});
-    };
-
+    }    
     return (
         <section>
             <div className="flex w-1/2">
@@ -75,23 +66,19 @@ export default function ItemList(){
                 {itemArray.map((item) => {
                     if (grouped === false) {
                         return (
-                            <ul key={item.id}>
-                                <Item itemObj={item} />
-                            </ul>
-                        );
-                    } else {
-                        const groupedItems = groupItemsByCategory();
-                        return Object.keys(groupedItems).map((category) => (
-                            <div key={category}>
-                                <h2 className="text-l font-bold capitalize">{category}</h2>
+                            <ul><Item itemObj={item} /></ul>
+                        )
+                    } 
+                    else {
+                        return (
+                            <div>
+                                <h2 className="text-l font-bold">{item.category}</h2>
                                 <ul>
-                                    {groupedItems[category].map((groupedItem) => (
-                                        <Item key={groupedItem.id} itemObj={groupedItem} />
-                                    ))}
-                                </ul>
+                                    <Item itemObj={item} />
+                                    </ul>
                             </div>
-                        ));
-                    }
+                        );
+                    }   
                 })}
             </div>
         </section>
