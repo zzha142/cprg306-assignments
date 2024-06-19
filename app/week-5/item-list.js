@@ -32,7 +32,6 @@ export default function ItemList(){
         setSort(event.target.value);
         setGrouped(false);
     }
-
     const handleGroupedChange = (event) =>{
         setSort(event.target.value);
         setGrouped(true);
@@ -40,13 +39,12 @@ export default function ItemList(){
 
     const renderItems = () => {
         const displayedCategories = [];
-
-        return itemArray.map((item, index) => {
+        return itemArray.map((item) => {
             if (grouped) {
                 if (!displayedCategories.includes(item.category)) {
                     displayedCategories.push(item.category);
                     return (
-                        <div key={index}>
+                        <div>
                             <h2 className="text-xl font-bold capitalize">{item.category}</h2>
                             <ul>
                                 <Item itemObj={item} />
@@ -55,14 +53,14 @@ export default function ItemList(){
                     );
                 } else {
                     return (
-                        <ul key={index}>
-                            <Item itemObj={item} />
+                        <ul>
+                            <Item itemObj={item} /> 
                         </ul>
                     );
                 }
             } else {
                 return (
-                    <ul key={index}>
+                    <ul>
                         <Item itemObj={item} />
                     </ul>
                 );
