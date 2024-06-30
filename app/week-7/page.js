@@ -3,6 +3,7 @@ import NewItem from "./new-item";
 import ItemList from "./item-list";
 import ItemData from "./items.json";
 import { useState } from "react";
+import MealIdeas from "./meal-ideas";
 
 export default function Page() {
   const [itemList, setItemList] = useState(
@@ -14,10 +15,15 @@ export default function Page() {
   };
 
   return (
-    <main className="f-screen bg-white">
-      <h1 className="font-bold text-4xl">Shopping List</h1>
-      <NewItem onAddItem={handleAddItem} />
-      <ItemList listOfItems={itemList} />
+    <main className=" flex f-screen bg-white">
+      <div className="flex-2">
+        <h1 className="font-bold text-4xl">Shopping List</h1>
+        <NewItem onAddItem={handleAddItem} />
+        <ItemList listOfItems={itemList} />
+      </div>
+      <div className="flex-1">
+        <MealIdeas />
+      </div>
     </main>
   );
 }

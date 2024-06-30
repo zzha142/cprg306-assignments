@@ -2,8 +2,8 @@
 import { useState } from "react";
 import Item from "./item";
 
-export default function ItemList({ listOfItems }) {
-  let buttonStyle = "flex-1 font-bold text-xl rounded-md py-3 m-2";
+export default function ItemList({ listOfItems, onItemSelect }) {
+  let buttonStyle = "font-bold text-xl rounded-md py-2 m-2 px-3";
   let activeStyle = "bg-orange-400";
   let inactiveStyle = "bg-orange-200";
 
@@ -38,21 +38,21 @@ export default function ItemList({ listOfItems }) {
             <div>
               <h2 className="text-xl font-bold capitalize">{item.category}</h2>
               <ul>
-                <Item itemObj={item} />
+                <Item itemObj={item} onClick={onItemSelect} />
               </ul>
             </div>
           );
         } else {
           return (
             <ul>
-              <Item itemObj={item} />
+              <Item itemObj={item} onClick={onItemSelect} />
             </ul>
           );
         }
       } else {
         return (
           <ul>
-            <Item itemObj={item} />
+            <Item itemObj={item} onClick={onItemSelect} />
           </ul>
         );
       }
@@ -61,12 +61,13 @@ export default function ItemList({ listOfItems }) {
 
   return (
     <section>
-      <div className="flex w-1/2">
+      <div className="flex">
         <label className="font-bold text-xl">Sort By:</label>
+
         <button
           className={`${buttonStyle} ${
             sort === "name" ? activeStyle : inactiveStyle
-          }`}
+          } flex`}
           value="name"
           onClick={handleSortChange}
         >
@@ -81,6 +82,7 @@ export default function ItemList({ listOfItems }) {
         >
           Category
         </button>
+
         <button
           className={`${buttonStyle} ${
             sort === "grouped" ? activeStyle : inactiveStyle
