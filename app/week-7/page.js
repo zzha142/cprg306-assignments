@@ -14,15 +14,27 @@ export default function Page() {
     setItemList([...itemList, newItem]);
   };
 
+  const [selectedItemName, setSelectedItemName] = useState("");
+
+  //works, can clean the name
+  const handleItemSelect = (name) => {
+    const cleanedItemName = String(name)
+      .split(",")[0]
+      .trim()
+      .replace(/[^a-zA-Z\s]/g, "");
+    setSelectedItemName(cleanedItemName);
+    console.dir(cleanedItemName);
+  };
+
   return (
     <main className=" flex f-screen bg-white">
       <div className="flex-2">
         <h1 className="font-bold text-4xl">Shopping List</h1>
         <NewItem onAddItem={handleAddItem} />
-        <ItemList listOfItems={itemList} />
+        <ItemList listOfItems={itemList} onItemSelect={handleItemSelect} />
       </div>
       <div className="flex-1">
-        <MealIdeas />
+        <MealIdeas ingredient={selectedItemName} />
       </div>
     </main>
   );

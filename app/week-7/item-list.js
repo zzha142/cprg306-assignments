@@ -23,6 +23,7 @@ export default function ItemList({ listOfItems, onItemSelect }) {
     setSort(event.target.value);
     setGrouped(false);
   };
+
   const handleGroupedChange = (event) => {
     setSort(event.target.value);
     setGrouped(true);
@@ -38,21 +39,21 @@ export default function ItemList({ listOfItems, onItemSelect }) {
             <div>
               <h2 className="text-xl font-bold capitalize">{item.category}</h2>
               <ul>
-                <Item itemObj={item} onClick={onItemSelect} />
+                <Item itemObj={item} onSelect={onItemSelect} />
               </ul>
             </div>
           );
         } else {
           return (
             <ul>
-              <Item itemObj={item} onClick={onItemSelect} />
+              <Item itemObj={item} onSelect={onItemSelect} />
             </ul>
           );
         }
       } else {
         return (
           <ul>
-            <Item itemObj={item} onClick={onItemSelect} />
+            <Item itemObj={item} onSelect={onItemSelect} />
           </ul>
         );
       }
@@ -60,7 +61,7 @@ export default function ItemList({ listOfItems, onItemSelect }) {
   };
 
   return (
-    <section>
+    <div>
       <div className="flex">
         <label className="font-bold text-xl">Sort By:</label>
 
@@ -95,6 +96,6 @@ export default function ItemList({ listOfItems, onItemSelect }) {
       </div>
 
       <div>{renderItems()}</div>
-    </section>
+    </div>
   );
 }

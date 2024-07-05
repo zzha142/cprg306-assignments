@@ -1,8 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 
-export default function MealIdeas() {
-  // const { idMeal, strMeal, strMealThumb } = mealObj;
+export default function MealIdeas({ ingredient }) {
+  let listStyle =
+    "font-bold text-l rounded-md py-2 px-2 m-1 bg-orange-200 w-1/3";
+  let textStyle = "text-xl";
   const [meals, setMeals] = useState([]);
 
   async function fetchMealIdeas(ingredient) {
@@ -11,31 +13,27 @@ export default function MealIdeas() {
         `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`
       );
       const data = await response.json();
-      //console.dir(data);
-      return data;
+      return data.meals;
+    } catch (error) {
+      console.log(`Error: ${error.message}`);
+    }
+  }
+
+  //
+  async function loadMealIdeas() {
+    try {
+      const mealsData = await fetchMealIdeas(ingredient);
+      setMeals(mealsData);
     } catch (error) {
       console.log(`Error: ${error.message}`);
     }
   }
 
   useEffect(() => {
-    (async () => {
-      if (ingredient != null && ) {
-        const data = await fetchMealIdeas(ingredient);
-        setMeals(data);
-      }
-    })
-    fetchMealIdeas();
-  }, []);
-
-  async function loadMealIdeas() {
-    try {
-      const data = await fetchMealIdeas(ingredient);
-      setMeals(data);
-    } catch (error) {
-      console.log(`Error: ${error.message}`);
+    if (ingredient) {
+      loadMealIdeas();
     }
-  }
+  }, [ingredient]);
 
   //constructor for ingredient and measures// amount is not sure
   // const recipeDetail = [];
@@ -47,29 +45,28 @@ export default function MealIdeas() {
   //   }
   // }
 
-  //能够得到ID，但是这部分只有idMeal,strMeal, strMealThumb，没有它需要的ingredient
-
-  // useEffect(() => {
-  //   if (ingredient != null) {
-  //     loadMealIdeas();
-  //   }
-  // }, []);
-
   return (
     <div>
-      <h3>Meal Ideas</h3>
-      <p>
-        {/* {meals.length > 0 && ingredient !== undefined
-          ? `Here are some meal ideas using }:`
-          : `No meals for  $}`} */}
-      </p>
-
+      <h3 className="font-bold text-xl">Meal Ideas</h3>
       <ul>
-        <li>
-          {loadMealIdeas.map((item) => (
-            <li>{item.strMeal}</li>
-          ))}
-        </li>
+        {meals && meals.length > 0 ? (
+          <>
+            <p className={textStyle}>
+              Here are some meal ideas using {ingredient}
+            </p>
+            {meals.map((meal) => (
+              <li className={listStyle} key={meal.idMeal}>
+                {meal.strMeal}
+              </li>
+            ))}
+          </>
+        ) : (
+          <p className={textStyle}>
+            {ingredient
+              ? `No meal ideas found for ${ingredient}`
+              : "Select an item to see meal ideas."}
+          </p>
+        )}
       </ul>
     </div>
   );
