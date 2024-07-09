@@ -36,24 +36,24 @@ export default function ItemList({ listOfItems, onItemSelect }) {
         if (!displayedCategories.includes(item.category)) {
           displayedCategories.push(item.category);
           return (
-            <div>
+            <div key={item.category}>
               <h2 className="text-xl font-bold capitalize">{item.category}</h2>
               <ul>
-                <Item itemObj={item} onSelect={onItemSelect} />
+                <Item key={item.id} itemObj={item} onSelect={onItemSelect} />
               </ul>
             </div>
           );
         } else {
           return (
             <ul>
-              <Item itemObj={item} onSelect={onItemSelect} />
+              <Item key={item.id} itemObj={item} onSelect={onItemSelect} />
             </ul>
           );
         }
       } else {
         return (
           <ul>
-            <Item itemObj={item} onSelect={onItemSelect} />
+            <Item key={item.id} itemObj={item} onSelect={onItemSelect} />
           </ul>
         );
       }

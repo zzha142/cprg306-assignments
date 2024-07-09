@@ -1,8 +1,9 @@
 export default function Item({ itemObj, onSelect }) {
-  let { name, quantity, category } = itemObj;
+  let { name, quantity, category, id } = itemObj;
 
   return (
     <div
+      key={id}
       className="m-6 p-2 bg-sky-200 w-1/2 hover:bg-orange-400 cursor-pointer rounded-lg"
       onClick={() => onSelect(name)} // changed onClick={onSelect(name)} to onClick={() => onSelect(name)}
     >
