@@ -52,7 +52,7 @@ export default function ItemList({ listOfItems, onItemSelect }) {
         }
       } else {
         return (
-          <ul>
+          <ul key={item.category}>
             <Item key={item.id} itemObj={item} onSelect={onItemSelect} />
           </ul>
         );
