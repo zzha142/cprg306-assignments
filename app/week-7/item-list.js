@@ -38,23 +38,15 @@ export default function ItemList({ listOfItems, onItemSelect }) {
           return (
             <div key={item.category}>
               <h2 className="text-xl font-bold capitalize">{item.category}</h2>
-              <ul>
-                <Item
-                  key={`${item.category}-${item.id}`}
-                  itemObj={item}
-                  onSelect={onItemSelect}
-                />
+              <ul key={`${item.category}-${item.id}`}>
+                <Item key={item.id} itemObj={item} onSelect={onItemSelect} />
               </ul>
             </div>
           );
         } else {
           return (
-            <ul>
-              <Item
-                key={`${item.category}-${item.id}`}
-                itemObj={item}
-                onSelect={onItemSelect}
-              />
+            <ul key={`${item.category}-${item.id}`}>
+              <Item key={item.id} itemObj={item} onSelect={onItemSelect} />
             </ul>
           );
         }
