@@ -27,31 +27,30 @@ export default function ItemList({ listOfItems }) {
     setSort(event.target.value);
     setGrouped(true);
   };
-
   const renderItems = () => {
     const displayedCategories = [];
-    return listOfItems.map((item) => {
+    return itemArray.map((item) => {
       if (grouped) {
         if (!displayedCategories.includes(item.category)) {
           displayedCategories.push(item.category);
           return (
             <div key={item.category}>
               <h2 className="text-xl font-bold capitalize">{item.category}</h2>
-              <ul key={`${item.category}-${item.id}`}>
+              <ul>
                 <Item key={item.id} itemObj={item} />
               </ul>
             </div>
           );
         } else {
           return (
-            <ul key={`${item.category}-${item.id}`}>
+            <ul key={item.id}>
               <Item key={item.id} itemObj={item} />
             </ul>
           );
         }
       } else {
         return (
-          <ul>
+          <ul key={item.id}>
             <Item key={item.id} itemObj={item} />
           </ul>
         );
