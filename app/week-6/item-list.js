@@ -27,9 +27,10 @@ export default function ItemList({ listOfItems }) {
     setSort(event.target.value);
     setGrouped(true);
   };
+
   const renderItems = () => {
     const displayedCategories = [];
-    return itemArray.map((item) => {
+    return listOfItems.map((item) => {
       if (grouped) {
         if (!displayedCategories.includes(item.category)) {
           displayedCategories.push(item.category);
