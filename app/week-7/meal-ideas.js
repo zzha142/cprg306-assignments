@@ -30,10 +30,8 @@ export default function MealIdeas({ ingredient }) {
   }
 
   useEffect(() => {
-    if (ingredient) {
-      loadMealIdeas();
-    }
-  }, [ingredient]);
+    loadMealIdeas();
+  }, [loadMealIdeas]);
 
   //constructor for ingredient and measures// amount is not sure
   // const recipeDetail = [];
