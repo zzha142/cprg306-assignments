@@ -45,14 +45,14 @@ export default function ItemList({ listOfItems, onItemSelect }) {
           );
         } else {
           return (
-            <ul key={item.category}>
+            <ul key={item.id}>
               <Item key={item.id} itemObj={item} onSelect={onItemSelect} />
             </ul>
           );
         }
       } else {
         return (
-          <ul key={item.category}>
+          <ul key={item.id}>
             <Item key={item.id} itemObj={item} onSelect={onItemSelect} />
           </ul>
         );
