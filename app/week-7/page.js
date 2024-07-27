@@ -27,7 +27,7 @@ export default function Page() {
   };
 
   return (
-    <main className="flex f-screen bg-white">
+    <main className="flex h-screen bg-white">
       <div className="flex-2">
         <h1 className="font-bold text-4xl">Shopping List</h1>
         <NewItem onAddItem={handleAddItem} />
