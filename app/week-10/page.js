@@ -23,7 +23,7 @@ export default function Page() {
   }
 
   return (
-    <main className="f-screen bg-white ">
+    <main className="h-screen bg-white ">
       <header>
         <h1 className="font-bold text-4xl">Shopping List App</h1>
       </header>
